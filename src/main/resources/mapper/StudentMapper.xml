@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.zzr1000.org.zzr1000.springTest.dao.StudentMapper">
+
+    <!-- insert student -->
+    <insert id = "insert" parameterType="org.zzr1000.org.zzr1000.springTest.model.StudentInfo">
+        INSERT INTO student_info(name,sex,major,height) VALUES(#{name},#{sex},#{major},#{height});
+    </insert>
+
+    <!-- update student -->
+    <update id="update" parameterType="org.zzr1000.org.zzr1000.springTest.model.StudentInfo">
+        UPDATE student_info SET sex=#{sex} , major=#{major} , height = #{height} WHERE name=#{name}
+    </update>
+
+    <!-- find student -->
+    <select id="find" parameterType="String" resultType="org.zzr1000.org.zzr1000.springTest.model.StudentInfo">
+        SELECT name,name,major,height FROM student_info WHERE name=#{0}
+    </select>
+
+    <!-- delete student -->
+    <delete id="delete" parameterType="String">
+        DELETE FROM student_info WHERE name=#{0}
+    </delete>
+
+</mapper>
