@@ -23,7 +23,7 @@ public class StudentService implements StudentIService {
         JSONObject result = new JSONObject();
         studentMapper.insert(studentInfo);
 
-        result.put("stat","OK");
+        result.put("state","OK");
         result.put("message","success");
         return result;
 
