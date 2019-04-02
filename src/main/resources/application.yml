@@ -18,5 +18,5 @@ spring:
       type: org.apache.tomcat.jdbc.pool.DataSource
 
 mybatis:
-  typeAliasesPackage: smm.springboot_ftl.bean
+  typeAliasesPackage: org.zzr1000.springTest.model
   mapperLocations: classpath:/mapper/StudentMapper.xml
