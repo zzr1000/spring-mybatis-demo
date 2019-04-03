@@ -1,4 +1,4 @@
-package org.zzr1000.springTest;
+package org.zzr1000.springTest.controller;
 
 
 import io.swagger.annotations.ApiOperation;
@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-public class HelloWorldController {
+public class HelloRestController {
 
     @ApiOperation(value = "swagger功能测试1")
     @GetMapping("/index/{name}")
