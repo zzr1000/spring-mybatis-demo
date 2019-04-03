@@ -16,7 +16,10 @@ spring:
       test-while-idle: true
       time-between-eviction-runs-millis: 600000
       type: org.apache.tomcat.jdbc.pool.DataSource
+  thymeleaf:
+    prefix: classpath:/templates/
 
 mybatis:
   typeAliasesPackage: org.zzr1000.springTest.model
   mapperLocations: classpath:/mapper/StudentMapper.xml
+
