@@ -8,8 +8,8 @@ public class JdbcTest {
         Connection conn = null;
         String sql ;
 
-        String conn_str = "jdbc:mysql://172.172.178.75:3306/t?"
-                + "user=root&password=Root@123&useUnicode=true&characterEncoding=UTF8";
+        String conn_str = "jdbc:mysql://xx.xx.xx.xx:3306/t?"
+                + "user=xx&password=xx@123&useUnicode=true&characterEncoding=UTF8";
         try {
             Class.forName("com.mysql.jdbc.Driver");// 动态加载mysql驱动
             System.out.println("成功加载MySQL驱动程序");
