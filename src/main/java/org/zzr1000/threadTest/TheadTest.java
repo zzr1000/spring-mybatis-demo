@@ -3,8 +3,10 @@ package org.zzr1000.threadTest;
 public class TheadTest {
 
     public static void main(String[] args) {
+        System.out.println("Begin");
         new MyThread("t1").start();
         new MyThread("t2").start();
+        System.out.println("End");
     }
 }
 
@@ -28,6 +30,7 @@ class MyThread extends Thread{
     public void run(){
         for(int i = 0 ; i < 20 ; i+=1){
             System.out.println(tname + ":" + i);
+            yield();//让步/放弃
         }
     }
 }
