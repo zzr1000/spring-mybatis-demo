@@ -57,6 +57,16 @@ public class WikipediaAnalysis {
                     }
                 });
 
+
+        // window的使用
+        keyedEdits.timeWindow(Time.minutes(5));
+        keyedEdits.timeWindow(Time.minutes(5),Time.minutes(1));
+        keyedEdits.countWindow(5);
+        keyedEdits.countWindow(5,1);
+
+
+
+
         result.print();
 
         see.execute("ddd");
