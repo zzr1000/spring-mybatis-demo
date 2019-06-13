@@ -1,12 +1,11 @@
 package org.zzr1000.md5Test;
 
 import com.google.common.hash.Hashing;
-import org.junit.Test;
+
 
 public class GuavaHashingTest {
 
-    @Test
-    public void test() {
+    public static void main(String[] args) {
         String input = "abc001";
         // 计算MD5
         System.out.println(Hashing.md5().hashBytes(input.getBytes()).toString());
