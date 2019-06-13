@@ -15,7 +15,7 @@ public class LogTest {
         // System.out.println("This is println message.");
 
         org.apache.log4j.LogManager.resetConfiguration();
-        org.apache.log4j.PropertyConfigurator.configure("C:\\Users\\zrz\\IdeaProjects\\spring-mybatis-demo\\src\\main\\resources\\log4j.properties");
+        org.apache.log4j.PropertyConfigurator.configure("log4j.properties");
 
         // 记录debug级别的信息
         logger.debug("This is debug message.");
