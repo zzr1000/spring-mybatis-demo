@@ -22,6 +22,8 @@
         <pagehelper.version>4.1.5</pagehelper.version>
         <flink.version>1.8.0</flink.version>
         <scala.binary.version>2.11</scala.binary.version>
+        <slf4j.version>1.7.12</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
     </properties>
 
 
@@ -150,6 +152,22 @@
             </exclusions>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${log4j.version}</version>
+        </dependency>
 
     </dependencies>
 
