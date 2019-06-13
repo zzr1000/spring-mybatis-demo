@@ -3,8 +3,7 @@ package org.zzr1000.md5Test;
 import com.google.common.hash.Hashing;
 import org.junit.Test;
 
-
-public class GuavaHashing {
+public class GuavaHashingTest {
 
     @Test
     public void test() {
