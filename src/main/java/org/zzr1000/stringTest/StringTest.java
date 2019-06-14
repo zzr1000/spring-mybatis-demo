@@ -2,6 +2,7 @@ package org.zzr1000.stringTest;
 
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 
 public class StringTest {
@@ -38,5 +39,47 @@ public class StringTest {
         byte test = (byte) b;//111001000取8位:11001000(负数的补码):对应的原码(00111000):56
         System.out.println(test);//-56
     }
+
+
+    //getByte:得到一个操作系统默认的编码格式的字节数组
+    @Test
+    public void getByteTest() throws UnsupportedEncodingException {
+        String a = "你";
+        byte[] array = a.getBytes();
+        byte[] array1 = a.getBytes("UTF-8");//字节数组:-128~127之间的数组成的数组:字节数组
+        byte[] array2 = a.getBytes("GBK");
+        byte[] array3 = a.getBytes("ISO8859-1");
+        System.out.println("default:");
+        for(byte x:array1){
+            System.out.println(x);
+        }
+        System.out.println("UTF-8:");
+        for(byte x:array1){
+            System.out.println(x);
+        }
+        System.out.println("GBK:");
+        for(byte x:array2){
+            System.out.println(x);
+        }
+        System.out.println("ISO8859-1:");
+        for(byte x:array2){
+            System.out.println(x);
+        }
+
+        //得到系统编码格式
+        System.out.println(System.getProperty("file.encoding"));
+
+    }
+
+    //有字节数组得到字符(字符串)
+    @Test
+    public void newString() throws UnsupportedEncodingException {
+        System.out.println(new String("中".getBytes()));//取按默认的取,转按默认的转
+        System.out.println(new String("中".getBytes("GBK"),"GBK"));//指定取、转编码格式
+        System.out.println(new String("中".getBytes("UTF-8"),"UTF-8"));
+        System.out.println(new String("中".getBytes("ISO8859-1"),"ISO8859-1"));
+        System.out.println(new String("中".getBytes("GBK"),"UTF-8"));//有问题
+    }
+
 
 }
