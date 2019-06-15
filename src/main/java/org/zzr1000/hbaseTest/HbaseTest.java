@@ -19,7 +19,7 @@ public class HbaseTest {
     static {//两种方式：一种是指定这三个需要的参数 ; 二是使用hbase-site.xml文件 ; 第一种情况下,参数可以直接指定,也可以通过配置文件获得
         configuration = HBaseConfiguration.create();
         configuration.set("hbase.zookeeper.property.clientPort", "2181");
-        configuration.set("hbase.zookeeper.quorum", "114.67.69.229");
+        configuration.set("hbase.zookeeper.quorum", "xxxx");
         configuration.set("zookeeper.znode.parent", "/hbase");
     }
 
@@ -29,6 +29,8 @@ public class HbaseTest {
         //createTablePreSplit1("t0614s1","1","9",4,"cf1");
         //System.out.println(createTablePreSplit2("t0615", Arrays.asList("cf1")));
         //putTest("t0615");批量插入，测试预分区表t0615
+        //getAll("t0615");
+        //dropTable("t0615");
         // QueryAll("wujintao");
         // QueryByCondition1("wujintao");
         // QueryByCondition2("wujintao");
@@ -212,6 +214,60 @@ public class HbaseTest {
         System.out.println("插入耗时：" + (System.currentTimeMillis() - startTime) / 1000 + " s" + " total:" + num);
 
     }
+
+
+    @Test
+    public  void getReginInfo() throws IOException {
+        getConnection();
+      //Table table = hbaseConnection.getTable(TableName.valueOf("t0615"));
+
+        //获取table region信息
+        HRegionInfo regionInfo;
+        Admin admin=hbaseConnection.getAdmin();
+        List<HRegionInfo> hRegionInfos=admin.getTableRegions(TableName.valueOf("t0615"));
+        System.out.println("region size():"+hRegionInfos.size());
+        closeConnection();
+    }
+
+    public static List<Map<String, Object>> getAll(String tableName) throws IOException {
+        getConnection();
+        Admin admin=hbaseConnection.getAdmin();
+        Table table = hbaseConnection.getTable(TableName.valueOf(tableName));
+
+        Scan scan = new Scan();
+        ResultScanner scanner = table.getScanner(scan);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (Result r : scanner) {
+            Map<String, Object> tmpMap = resultToMap(r);
+            list.add(tmpMap);
+        }
+        scanner.close();
+        admin.close();
+        table.close();
+        closeConnection();
+        System.out.println(">>>>>> " + tableName + " 查询成功! total=" + list.size());
+//      System.out.println("data:"+ JSONObject.toJSONString(list));
+        return list;
+    }
+
+
+    public static void dropTable(String tableName) throws IOException {
+        System.out.println(">>>>>>drop table " + tableName + " begin.");
+        getConnection();
+        Admin admin = hbaseConnection.getAdmin();
+        TableName table = TableName.valueOf(tableName);
+        admin.disableTable(table);
+        admin.deleteTable(table);
+        if (admin.tableExists(table)) {
+            System.err.println(">>>>>>drop table " + tableName + " fail.");
+        } else {
+            System.out.println(">>>>>>drop table " + tableName + " ok.");
+        }
+        admin.close();
+        closeConnection();
+    }
+
+
   //@Test
   //得到两位随机数
     public static String getRandomNumber() {
@@ -343,5 +399,71 @@ public class HbaseTest {
         }
         return sb.toString();
     }
+
+
+    /**
+     * 把result转换成map，方便返回json数据
+     *
+     * @param result
+     * @return
+     */
+    public static Map<String, Object> resultToMap(Result result) {
+        Map<String, Object> resMap = new HashMap<String, Object>();
+        List<Cell> listCell = result.listCells();
+        Map<String, Object> tempMap = new HashMap<String, Object>();
+        String rowname = "";
+        List<String> familynamelist = new ArrayList<String>();
+        for (Cell cell : listCell) {
+            byte[] rowArray = cell.getRowArray();
+            byte[] familyArray = cell.getFamilyArray();
+            byte[] qualifierArray = cell.getQualifierArray();
+            byte[] valueArray = cell.getValueArray();
+            int rowoffset = cell.getRowOffset();
+            int familyoffset = cell.getFamilyOffset();
+            int qualifieroffset = cell.getQualifierOffset();
+            int valueoffset = cell.getValueOffset();
+            int rowlength = cell.getRowLength();
+            int familylength = cell.getFamilyLength();
+            int qualifierlength = cell.getQualifierLength();
+            int valuelength = cell.getValueLength();
+
+            byte[] temprowarray = new byte[rowlength];
+            System.arraycopy(rowArray, rowoffset, temprowarray, 0, rowlength);
+            String temprow = Bytes.toString(temprowarray);
+
+            byte[] tempqulifierarray = new byte[qualifierlength];
+            System.arraycopy(qualifierArray, qualifieroffset, tempqulifierarray, 0, qualifierlength);
+            String tempqulifier = Bytes.toString(tempqulifierarray);
+
+            byte[] tempfamilyarray = new byte[familylength];
+            System.arraycopy(familyArray, familyoffset, tempfamilyarray, 0, familylength);
+            String tempfamily = Bytes.toString(tempfamilyarray);
+
+            byte[] tempvaluearray = new byte[valuelength];
+            System.arraycopy(valueArray, valueoffset, tempvaluearray, 0, valuelength);
+            String tempvalue = Bytes.toString(tempvaluearray);
+
+
+            tempMap.put(tempfamily + ":" + tempqulifier, tempvalue);
+            rowname = temprow;
+            String familyname = tempfamily;
+            if (familynamelist.indexOf(familyname) < 0) {
+                familynamelist.add(familyname);
+            }
+        }
+        resMap.put("rowname", rowname);
+        for (String familyname : familynamelist) {
+            HashMap<String, Object> tempFilterMap = new HashMap<String, Object>();
+            for (String key : tempMap.keySet()) {
+                String[] keyArray = key.split(":");
+                if (keyArray[0].equals(familyname)) {
+                    tempFilterMap.put(keyArray[1], tempMap.get(key));
+                }
+            }
+            resMap.put(familyname, tempFilterMap);
+        }
+        return resMap;
+    }
+
 
 }
