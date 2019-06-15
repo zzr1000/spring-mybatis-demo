@@ -4,6 +4,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -16,13 +17,14 @@ public class HbaseTest {
     static {//两种方式：一种是指定这三个需要的参数 ; 二是使用hbase-site.xml文件 ; 第一种情况下,参数可以直接指定,也可以通过配置文件获得
         configuration = HBaseConfiguration.create();
         configuration.set("hbase.zookeeper.property.clientPort", "2181");
-        configuration.set("hbase.zookeeper.quorum", "xx");
-        configuration.set("zookeeper.znode.parent", "/hbase-unsecure");
+        configuration.set("hbase.zookeeper.quorum", "114.67.69.229");
+        configuration.set("zookeeper.znode.parent", "/hbase");
     }
 
     public static void main(String[] args) throws Exception{
         //createTable("t0614","cf1","cf2");
         //insertData("t0614","r1","cf1","c1","v1");
+        createTablePreSplit1("t0614s1","1","9",4,"cf1");
         // QueryAll("wujintao");
         // QueryByCondition1("wujintao");
         // QueryByCondition2("wujintao");
@@ -77,7 +79,12 @@ public class HbaseTest {
         System.out.println("end create table ......");
     }
 
-    public static void createTablePreSplit(String tableName,String...cf) throws Exception {
+    public static void createTablePreSplit1(
+            String tableName,
+            String startKey,
+            String endKey,
+            int numRegions,
+            String... cf) throws Exception {
       //Connection hbaseConnection = ConnectionFactory.createConnection(configuration);
         getConnection();
         HBaseAdmin admin = (HBaseAdmin)hbaseConnection.getAdmin();
@@ -90,8 +97,10 @@ public class HbaseTest {
                 HColumnDescriptor family = new HColumnDescriptor(cf[i]);
                 td.addFamily(family);
             }
-            byte[][] splits =getHexSplits("100000000000000000", "ffffffffffffffffffff",
-                    300);
+            byte[][] splits =getHexSplits(//得到的是一个字节数组的数组
+                    startKey,
+                    endKey,
+                    numRegions);
             admin.createTable(td,splits);
             if (admin.tableExists(Bytes.toBytes(tableName))) {
                 System.out.println(">>>>>>表 " + tableName + ",创建成功！");
@@ -118,9 +127,6 @@ public class HbaseTest {
         closeConnection();
     }
 
-
-
-
     public static byte[][] getHexSplits(String startKey, String endKey, int numRegions) {
         byte[][] splits = new byte[numRegions-1][];
         BigInteger lowestKey = new BigInteger(startKey, 16);
@@ -136,5 +142,35 @@ public class HbaseTest {
         return splits;
     }
 
+    @Test
+    public void functionTest(){
+        //System.out.println(new BigInteger("1111"));//默认10进制
+        //System.out.println(new BigInteger("f",16));//radix:进制
+        System.out.println(String.format("%016x", 200));//%x：转换为16进制;016:添0补齐16位//重要
+        System.out.println(String.format("%016x", 200).getBytes());
+    }
 
+    @Test
+    public void getHexSplitsTest() {
+        byte[][] splits = new byte[10-1][];
+        BigInteger lowestKey = new BigInteger("0000000000", 16);
+        System.out.println(lowestKey);
+        BigInteger highestKey = new BigInteger("fffffffff", 16);
+        System.out.println(highestKey);
+        BigInteger range = highestKey.subtract(lowestKey);
+        System.out.println(range);
+        BigInteger regionIncrement = range.divide(BigInteger.valueOf(16));
+        System.out.println(regionIncrement);
+        lowestKey = lowestKey.add(regionIncrement);
+        System.out.println(lowestKey);
+        for(int i=0; i < 10-1;i++) {
+            BigInteger key = lowestKey.add(regionIncrement.multiply(BigInteger.valueOf(i)));
+            byte[] b = String.format("%016x", key).getBytes();
+            splits[i] = b;
+        }
+
+        for(byte[] i:splits) {//最终提供的startKey、endKey都不会在结果中，只打印中间结果
+            System.out.println(new String(i));
+        }
+    }
 }
