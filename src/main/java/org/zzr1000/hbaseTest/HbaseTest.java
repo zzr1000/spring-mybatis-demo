@@ -164,6 +164,54 @@ public class HbaseTest {
         return true;
     }
 
+    //预分区示例3：
+    public static void createTablePreSplit3() throws IOException {
+        getConnection();
+        String tableName = "test_pre_partition1";
+        //获取admin实例
+        Admin admin = hbaseConnection.getAdmin();
+        //创建表描述符
+        HTableDescriptor tableDescriptor = new HTableDescriptor(TableName.valueOf(tableName));
+        //添加列族描述符到表描述符中
+        HColumnDescriptor columnDescriptor = new HColumnDescriptor(Bytes.toBytes("info"));
+        tableDescriptor.addFamily(columnDescriptor);
+        //调用create方法,同时设置region边界。
+        //能够以特定数量拆分特定起始行键和特定终止行键，并创建表。
+        //startKey必须小于endKey，并且numRegions需要大于等于3，否则会抛出异常，这样才能确保region有最小的集合
+        //此方法使用Bytes.split()方法计算region边界，然后将计算得到的边界作为已拆分边界列表，并调用createTable(final HTableDescriptor desc, byte[][] splitKeys)方法
+        admin.createTable(tableDescriptor, Bytes.toBytes(1L), Bytes.toBytes(100L), 10);
+        closeConnection();
+    }
+
+    //预分区示例4：输入固定的预分区数组
+    public static void createTablePreSplit4() throws IOException {
+        getConnection();
+        String tableName = "test_pre_partition2";
+        //获取admin实例
+        Admin admin = hbaseConnection.getAdmin();
+        //创建表描述符
+        HTableDescriptor tableDescriptor = new HTableDescriptor(TableName.valueOf(tableName));
+        //添加列族描述符到表描述符中
+        HColumnDescriptor columnDescriptor = new HColumnDescriptor(Bytes.toBytes("info"));
+        tableDescriptor.addFamily(columnDescriptor);
+
+        //创建表中region的拆分行键
+        byte[][] regions = new byte[][] {
+                Bytes.toBytes("A"),
+                Bytes.toBytes("D"),
+                Bytes.toBytes("G"),
+                Bytes.toBytes("K"),
+                Bytes.toBytes("O"),
+                Bytes.toBytes("T")
+        };
+        tableDescriptor.setName(TableName.valueOf(tableName));
+        //使用新表明和region的已拆分键值列表作为参数调用建表命令
+        //使用已拆分行键的集合：使用了已经拆分好的region边界列表，因此结果都是与预期相符的。
+        admin.createTable(tableDescriptor, regions);
+        closeConnection();
+    }
+
+
     //单次插入单条记录
     public static void insertData(String tableName ,
                                   String rowKey ,
