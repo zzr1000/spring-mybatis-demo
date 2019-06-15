@@ -6,6 +6,7 @@ import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.junit.Test;
+import org.zzr1000.propertyLoadTest.PropertyLoadTest;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -18,8 +19,9 @@ public class HbaseTest {
 
     static {//两种方式：一种是指定这三个需要的参数 ; 二是使用hbase-site.xml文件 ; 第一种情况下,参数可以直接指定,也可以通过配置文件获得
         configuration = HBaseConfiguration.create();
+        PropertyLoadTest.initProperties("config.properties");
         configuration.set("hbase.zookeeper.property.clientPort", "2181");
-        configuration.set("hbase.zookeeper.quorum", "xxxx");
+        configuration.set("hbase.zookeeper.quorum", PropertyLoadTest.getConfigValue("hbase.zookeeper.quorum"));
         configuration.set("zookeeper.znode.parent", "/hbase");
     }
 
