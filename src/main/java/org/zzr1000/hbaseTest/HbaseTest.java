@@ -26,6 +26,7 @@ public class HbaseTest {
     }
 
     public static void main(String[] args) throws Exception{
+        //refer:https://www.cnblogs.com/zhenjing/p/hbase_example.html
         //createTable("t0614","cf1","cf2");
         //insertData("t0614","r1","cf1","c1","v1");
         //createTablePreSplit1("t0614s1","1","9",4,"cf1");
