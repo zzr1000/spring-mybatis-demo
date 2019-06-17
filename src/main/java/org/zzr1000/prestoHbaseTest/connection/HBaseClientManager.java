@@ -4,10 +4,16 @@ import com.google.inject.Inject;
 import io.airlift.log.Logger;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.HTableDescriptor;
+import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.zzr1000.prestoHbaseTest.meta.HBaseConfig;
+import org.zzr1000.prestoHbaseTest.meta.HBaseTable;
+
+import java.io.IOException;
+import java.util.Objects;
 
 import static org.zzr1000.prestoHbaseTest.util.Constant.SYSTEMOUT_INTERVAL;
 
@@ -43,6 +49,33 @@ public class HBaseClientManager {
             log.error(ex, ex.getMessage());
         }
     }
+
+
+    public HBaseTable getTable(String schema, String tableName) {
+        Objects.requireNonNull(schema, "schema is null");
+        Objects.requireNonNull(tableName, "tableName is null");
+        TableName hTableName = TableName.valueOf(schema.getBytes(), tableName.getBytes());
+        HTableDescriptor hTableDescriptor = null;
+
+        Admin admin = null;
+        try {
+            admin = this.getAdmin();
+            hTableDescriptor = admin.getTableDescriptor(hTableName);
+        } catch (IOException ex) {
+            log.error(ex, ex.getMessage());
+        } finally {
+            if (admin != null) {
+                this.close(admin);
+            }
+        }
+
+        if (hTableDescriptor == null) {
+            return null;
+        } else {
+            return new HBaseTable(schema, hTableDescriptor, config);
+        }
+    }
+
 
 
     //=============类中被引用方法：
