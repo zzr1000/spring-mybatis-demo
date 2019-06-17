@@ -26,6 +26,7 @@
         <log4j.version>1.2.17</log4j.version>
         <guava.version>16.0</guava.version>
         <JAVA_HOME>D:\Program Files\Java\jdk1.8.0_191</JAVA_HOME>
+        <presto.version>0.201</presto.version>
     </properties>
 
 
@@ -226,6 +227,20 @@
             <scope>system</scope>
             <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
         </dependency>
+
+        <dependency>
+            <groupId>com.facebook.presto</groupId>
+            <artifactId>presto-main</artifactId>
+            <version>${presto.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.facebook.presto</groupId>
+            <artifactId>presto-array</artifactId>
+            <version>${presto.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
 
     </dependencies>
 
