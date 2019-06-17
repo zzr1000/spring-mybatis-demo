@@ -1,6 +1,7 @@
 package org.zzr1000.prestoHbaseTest.util;
 
 import com.facebook.presto.spi.ColumnMetadata;
+import com.facebook.presto.spi.type.*;
 import com.google.common.collect.ImmutableList;
 import io.airlift.log.Logger;
 import org.apache.commons.io.FileUtils;
@@ -70,5 +71,42 @@ public class Utils {
         }
         return "";
     }
+
+
+    /**
+     * Find the presto type of column you configured in json file by type flag.
+     *
+     * @param type The type value that configured in json file.
+     * @return type in presto
+     */
+    private static Type matchType(String type) {
+        if (type == null) {
+            return VarcharType.VARCHAR;
+        }
+
+        switch (type.toLowerCase()) {
+            case "string":
+                return VarcharType.VARCHAR;
+            case "int":
+                return IntegerType.INTEGER;
+            case "bigint":
+                return BigintType.BIGINT;
+            case "double":
+                return DoubleType.DOUBLE;
+            case "boolean":
+                return BooleanType.BOOLEAN;
+            case "array<string>":
+                return new ArrayType(VarcharType.VARCHAR);
+            case "timestamp":
+                return TimestampType.TIMESTAMP;
+            case "datetime":
+                return TimestampType.TIMESTAMP;
+            case "number":
+                return DecimalType.createDecimalType(DECIMAL_DEFAULT_PRECISION, DECIMAL_DEFAULT_SCALE);
+            default:
+                return VarcharType.VARCHAR;
+        }
+    }
+
 
 }
