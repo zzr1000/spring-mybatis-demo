@@ -13,7 +13,7 @@ public class Client {
         Injector in = Guice.createInjector(new Module(){
             @Override
             public void configure(Binder arg0) {
-                //什null
+                //null
             }
         }) ;
         //得到HelloCaller的实例
