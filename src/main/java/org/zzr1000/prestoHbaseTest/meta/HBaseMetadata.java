@@ -73,6 +73,7 @@ public class HBaseMetadata implements ConnectorMetadata {
         return this.getTableMetadata(tableName);
     }
 
+    //6、
     @Override
     public List<SchemaTableName> listTables(ConnectorSession session, String schemaNameOrNull) {
         return null;
