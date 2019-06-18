@@ -1,4 +1,4 @@
-package org.zzr1000.guiceTest.a;
+package org.zzr1000.guiceTest.aBaseDemo;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

@@ -1,8 +1,8 @@
-package org.zzr1000.guiceTest.b;
+package org.zzr1000.guiceTest.bInjectDemo;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import org.zzr1000.guiceTest.a.Dao;
+import org.zzr1000.guiceTest.aBaseDemo.Dao;
 
 //属性注入
 @Singleton

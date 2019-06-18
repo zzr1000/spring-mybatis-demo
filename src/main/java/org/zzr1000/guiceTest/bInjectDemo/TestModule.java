@@ -1,8 +1,8 @@
-package org.zzr1000.guiceTest.b;
+package org.zzr1000.guiceTest.bInjectDemo;
 
 import com.google.inject.AbstractModule;
-import org.zzr1000.guiceTest.a.Dao;
-import org.zzr1000.guiceTest.a.DaoImpl;
+import org.zzr1000.guiceTest.aBaseDemo.Dao;
+import org.zzr1000.guiceTest.aBaseDemo.DaoImpl;
 
 //module中需要绑定对应TestInjection这个类才可以使用.
 public class TestModule extends AbstractModule {
