@@ -1,6 +1,6 @@
 package org.zzr1000.threadTest;
 
-public class TheadTest {
+public class ThreadTest {
 
     public static void main(String[] args) {
         System.out.println("Begin");
