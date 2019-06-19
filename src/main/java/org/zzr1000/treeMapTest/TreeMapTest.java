@@ -1,10 +1,6 @@
 package org.zzr1000.treeMapTest;
 
-
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 //（1）TreeMap的基本操作 containsKey、get、put 和 remove 的时间复杂度是 log(n) ，TreeMap是非同步的
 //（2）TreeMap中默认的排序为升序，如果要改变其排序可以自己写一个Comparator
@@ -25,8 +21,19 @@ public class TreeMapTest {
         }
 
         System.out.println("======遍历：========");
-        //TODO
+        //TODO1
 
+        //put、putAll、removeAll：
+        //refer to : io.airlift.bootstrap.Bootstrap
+        TreeMap<String, String> unusedProperties = new TreeMap<>();
+        unusedProperties.put("A","a");
+        Map<String, String> requiredProperties = new HashMap<>();
+        requiredProperties.put("B","b");
+        requiredProperties.put("C","c");
+        unusedProperties.putAll(requiredProperties);
+        System.out.println("unusedProperties:" + unusedProperties);
+        unusedProperties.keySet().remove("C");
+        System.out.println("unusedProperties:" + unusedProperties);
     }
 
 }
