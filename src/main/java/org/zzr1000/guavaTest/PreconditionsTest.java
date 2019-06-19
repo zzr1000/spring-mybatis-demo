@@ -9,7 +9,7 @@ import org.junit.Test;
 // https://blog.csdn.net/dyllove98/article/details/9140523
 //1、checkArgument：检查传入参数是否为true
 //2、checkNotNull：检查传入参数是否为null
-//3、checkState：检查对象状态
+//3、checkState：检查对象状态：表达式为true不抛异常
 public class PreconditionsTest {
 
     @Test
@@ -38,7 +38,8 @@ public class PreconditionsTest {
 
     public static void getPersonByPrecondition(int age,String name)throws Exception {
         Preconditions.checkNotNull(name, "name为null");
-        Preconditions.checkArgument(name.length() > 0, "name为\'\'");
+        Preconditions.checkState(name.length() > 0, "checkState：name为\'\'");//checkState、checkArgument等价，都是判断表达式是否为true
+        Preconditions.checkArgument(name.length() > 0, "checkArgument：name为\'\'");
         Preconditions.checkArgument(age > 0, "age 必须大于0");
         System.out.println("a person age:" + age + ",name:" + name);
     }
