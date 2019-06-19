@@ -15,7 +15,7 @@ public class AConfig {
     private String configC;
     private String configD;
 
-    @NotNull
+    //@NotNull
     public String getConfigA() {
         return configA;
     }
@@ -25,7 +25,7 @@ public class AConfig {
         this.configA = configA;
     }
 
-    @NotNull
+    //@NotNull
     public String getConfigB() {
         return configB;
     }
@@ -35,7 +35,7 @@ public class AConfig {
         this.configB = configB;
     }
 
-    @NotNull
+    //@NotNull
     public String getConfigC() {
         return configC;
     }
@@ -45,7 +45,7 @@ public class AConfig {
         this.configC = configC;
     }
 
-    @NotNull
+    //@NotNull
     public String getConfigD() {
         return configD;
     }
