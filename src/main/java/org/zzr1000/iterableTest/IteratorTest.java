@@ -9,6 +9,9 @@ import java.util.List;
 
 // refer to : https://www.cnblogs.com/hongwz/p/5510092.html
 // 经常使用 for-each循环来遍历来Collection，也可用Iterator
+// iterator、iterable关系：
+// Iterator是迭代器类，而Iterable是接口。
+// 好多类都实现了Iterable接口，这样对象就可以调用iterator()方法。
 public class IteratorTest {
 
     @Test
