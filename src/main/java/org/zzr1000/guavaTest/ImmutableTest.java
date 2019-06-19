@@ -2,11 +2,11 @@ package org.zzr1000.guavaTest;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.inject.Module;
 import org.junit.Test;
 
 import java.util.*;
-
+// 所有不可变集合都有一个asList()方法
+// 提供ImmutableList视图，来帮助你用列表形式方便地读取集合元素。
 public class ImmutableTest {
     @Test
     // 虽然unmodifiableList不可以直接添加元素，
@@ -68,6 +68,7 @@ public class ImmutableTest {
         ImmutableList<String> strList2 = ImmutableList.<String>builder().add("a").add("b").build();
 
         System.out.println(strList1);
+        System.out.println("asList:" + strList1.asList());
         System.out.println(strList2);
 
     }
