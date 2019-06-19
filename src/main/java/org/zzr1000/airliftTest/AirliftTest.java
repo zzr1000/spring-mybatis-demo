@@ -18,7 +18,8 @@ public class AirliftTest {
 
         Map<String,String> requiredConfig = new HashMap<>();
 
-        Bootstrap e = new Bootstrap(new Module[]{new JsonModule(),new AModule()});
+        Bootstrap e = new Bootstrap(
+                new Module[]{new JsonModule(),new AModule()});
 
         Injector injector = e.strictConfig()
                 .doNotInitializeLogging()
