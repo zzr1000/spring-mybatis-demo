@@ -10,6 +10,7 @@ public class Client {
     //创建一个测试程序
     public static void main(String[] args) {
 
+        //Module[] 数组还可以作为io.airlift.bootstrap.Bootstrap的参数
         Injector in = Guice.createInjector(new Module(){
             @Override
             public void configure(Binder arg0) {
@@ -20,6 +21,12 @@ public class Client {
         HelloCaller helloCaller = in.getInstance(HelloCaller.class) ;
         //调用sayHello方法
         helloCaller.sayHello() ;
+
+        System.out.println("==============");
+
+        Injector in2 = Guice.createInjector();
+        HelloCaller helloCaller2 = in2.getInstance(HelloCaller.class) ;
+        helloCaller2.sayHello();
 
     }
 }
