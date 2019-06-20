@@ -16,6 +16,8 @@ public class SplitTest {
         //取最后一个字符
         System.out.println(strarray[strarray.length - 1]);
 
+        System.out.println(str.split(" ")[str.split(" ").length - 1]);
+
     }
 
 
