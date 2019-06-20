@@ -19,8 +19,10 @@ public class AConfig {
     }
 
     @Config("configA")
-    public void setConfigA(String configA) {
-        this.configA = configA;
+    //将形参中的configA替换为c做测试验证：
+    //测试验证证明：注解的名称、形参的名称：可以不同：..
+    public void setConfigA(String c) {
+        this.configA = c;
     }
 
     //@NotNull
