@@ -1,4 +1,4 @@
-package org.zzr1000.todoQuartz;
+package org.zzr1000.todo.todoQuartz;
 
 public class QuartzTest {
 

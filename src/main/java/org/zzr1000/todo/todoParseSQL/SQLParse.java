@@ -1,4 +1,4 @@
-package org.zzr1000.todoParseSQL;
+package org.zzr1000.todo.todoParseSQL;
 
 public class SQLParse {
 
