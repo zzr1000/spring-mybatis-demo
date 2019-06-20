@@ -1,8 +1,6 @@
-package org.zzr1000.airliftTest;
+package org.zzr1000.airliftBootstrapTest;
 
 import io.airlift.configuration.Config;
-
-import javax.validation.constraints.NotNull;
 
 //如果该类中，没有任何值，会有如下报错：
 //Error: Configuration class [org.zzr1000.airliftTest.AConfig]

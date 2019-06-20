@@ -1,4 +1,4 @@
-package org.zzr1000.airliftTest;
+package org.zzr1000.airliftBootstrapTest;
 
 import com.google.inject.Binder;
 import com.google.inject.Injector;
