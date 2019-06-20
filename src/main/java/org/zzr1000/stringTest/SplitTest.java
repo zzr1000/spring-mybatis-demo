@@ -18,6 +18,13 @@ public class SplitTest {
 
         System.out.println(str.split(" ")[str.split(" ").length - 1]);
 
+        String[] s = "a.b.c".split("\\.");//需要加 双斜杠 转义字符
+        System.out.println(s.length);
+        for (int i = 0 ; i < s.length ; i++){
+            System.out.println(s[i]);
+        }
+
+
     }
 
 
