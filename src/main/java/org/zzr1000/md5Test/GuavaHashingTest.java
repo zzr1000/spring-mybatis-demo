@@ -6,7 +6,7 @@ import com.google.common.hash.Hashing;
 public class GuavaHashingTest {
 
     public static void main(String[] args) {
-        String input = "abc001";
+        String input = "foo0001";
         // 计算MD5
         System.out.println(Hashing.md5().hashBytes(input.getBytes()).toString());
 //        // 计算sha256
@@ -16,7 +16,7 @@ public class GuavaHashingTest {
 //        // 计算crc32
 //        System.out.println(Hashing.crc32().hashBytes(input.getBytes()).toString());
 
-        System.out.println(Hashing.md5().hashUnencodedChars(input).toString());
+//        System.out.println(Hashing.md5().hashUnencodedChars(input).toString());
 
     }
 }

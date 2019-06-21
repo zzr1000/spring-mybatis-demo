@@ -8,6 +8,8 @@ import org.zzr1000.springTest.dao.StudentMapper;
 import org.zzr1000.springTest.model.StudentInfo;
 import org.zzr1000.springTest.service.StudentIService;
 
+import java.util.List;
+
 
 @Service
 @ComponentScan({"org.zzr1000.springTest.dao"})
@@ -35,7 +37,7 @@ public class StudentService implements StudentIService {
     }
 
     @Override
-    public StudentInfo find(String name) {
+    public List<StudentInfo> find(String name) {
         return studentMapper.find(name);
     }
 

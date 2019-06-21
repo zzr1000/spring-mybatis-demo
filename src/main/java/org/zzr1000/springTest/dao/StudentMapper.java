@@ -3,6 +3,8 @@ package org.zzr1000.springTest.dao;
 
 import org.zzr1000.springTest.model.StudentInfo;
 
+import java.util.List;
+
 //@Mapper
 public interface StudentMapper {
 
@@ -12,6 +14,6 @@ public interface StudentMapper {
 
      void delete(String name);
 
-     StudentInfo find(String name);
+     List<StudentInfo> find(String name);
 
 }
