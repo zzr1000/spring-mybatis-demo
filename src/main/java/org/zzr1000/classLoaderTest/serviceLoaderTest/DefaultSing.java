@@ -1,4 +1,4 @@
-package org.zzr1000.serviceLoaderTest;
+package org.zzr1000.classLoaderTest.serviceLoaderTest;
 
 import com.google.auto.service.AutoService;
 
