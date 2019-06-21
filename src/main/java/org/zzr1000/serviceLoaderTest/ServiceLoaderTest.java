@@ -17,6 +17,9 @@ public class ServiceLoaderTest {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         ServiceLoader<Sing> loader = ServiceLoader.load(Sing.class, classLoader);
 
+        //如果有多个实现类，会有多个、多次调用：从这个地方可以看出：
+        //presto放plugin jar文件的目录名称可以任意取，
+        //另外甚至可以多个plugin的jar文件放在一个目录下，也是可以的 :..
         for (Sing sing : loader) {
             sing.sing();
         }
