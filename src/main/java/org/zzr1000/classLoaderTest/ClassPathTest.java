@@ -2,6 +2,8 @@ package org.zzr1000.classLoaderTest;
 
 import org.junit.Test;
 
+import java.io.File;
+
 //refer to : https://blog.csdn.net/z69183787/article/details/22774537
 public class ClassPathTest {
 
@@ -27,5 +29,10 @@ public class ClassPathTest {
         System.out.println(">>>>>>9::: " + ClassLoader.getSystemResource("tb.sql"));
         //得到的是当前类class文件所在目录：file:/D:/zzr/git/spring-mybatis-demo2/spring-mybatis-demo/target/classes/org/zzr1000/classLoaderTest/
         System.out.println(">>>>>>a::: " + ClassPathTest.class.getResource(""));
+        //得到如下：/D:/zzr/git/spring-mybatis-demo2/spring-mybatis-demo/target/classes/
+        System.out.println(">>>>>>b::: " + Thread.currentThread().getContextClassLoader().getResource("").getPath());
+        String p1 = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        //输出：D:\zzr\git\spring-mybatis-demo2\spring-mybatis-demo\target
+        System.out.println(">>>>>>c::: " + new File(p1).getParent());
     }
 }
