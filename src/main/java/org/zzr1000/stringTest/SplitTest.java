@@ -23,9 +23,16 @@ public class SplitTest {
         for (int i = 0 ; i < s.length ; i++){
             System.out.println(s[i]);
         }
-
-
     }
 
 
+    @Test
+    //数组for循环
+    public void test1(){
+        String str1 = "/D:/zzr/git/spring-mybatis-demo2/spring-mybatis-demo/target/classes/";
+        String[] str2 = str1.split("\\/");
+        for(String s1:str2){
+            System.out.println(s1);
+        }
+    }
 }
