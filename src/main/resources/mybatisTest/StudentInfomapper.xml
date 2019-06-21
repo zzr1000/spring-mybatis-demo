@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zzr1000.mybatisTest.StudentInfomapper"><!-- 映射接口类的 路径！！！ -->
+
+    <!-- 实体类 中 与表名字 不同  使用 resultMap 来创建 别名映射！-->
+    <resultMap type="users" id="userMap">
+        <id column="u_id" property="id" jdbcType="INTEGER"/>
+        <result column="u_name" property="name"/>
+        <result column="u_sex" property="sex"/>
+    </resultMap>
+
+    <!-- 查询 所有 数据 测试！ -->
+    <select id="getAllInfo" resultMap="userMap"> <!-- 直接引用 上面的 resultMap -->
+
+        select u_id,u_name,u_sex from users
+
+    </select>
+
+</mapper>
