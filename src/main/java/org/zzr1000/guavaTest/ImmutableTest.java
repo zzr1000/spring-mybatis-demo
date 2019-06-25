@@ -1,14 +1,14 @@
 package org.zzr1000.guavaTest;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import org.junit.Test;
-
-import java.util.*;
+//import com.google.common.collect.ImmutableList;
+//import com.google.common.collect.ImmutableSet;
+//import org.junit.Test;
+//
+//import java.util.*;
 // 所有不可变集合都有一个asList()方法
 // 提供ImmutableList视图，来帮助你用列表形式方便地读取集合元素。
 public class ImmutableTest {
-    @Test
+/*    @Test
     // 虽然unmodifiableList不可以直接添加元素，
     // 但list是可以添加元素的，而list的改变也会使unmodifiableList改变。
     // 所以说Collections.unmodifiableList实现的不是真正的不可变集合。
@@ -71,7 +71,7 @@ public class ImmutableTest {
         System.out.println("asList:" + strList1.asList());
         System.out.println(strList2);
 
-    }
+    }*/
 }
 
 
