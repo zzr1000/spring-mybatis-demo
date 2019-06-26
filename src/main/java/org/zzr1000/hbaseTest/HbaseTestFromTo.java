@@ -59,6 +59,12 @@ public class HbaseTestFromTo {
         scan.setStopRow(ek);
         scan.setMaxResultSize(100);
 
+        //下面对于scanner的循环，如果一次循环完，在插入，会创建一个非常大的batchPutList
+        //有可能会造成oom，可以设置一个flag，当数据大于xxxx值的时候，就执行一个batchPut
+        //然后将list置为空，在执行后续重复操作：. .
+        //这些，都是一些实际测试实践过程中的一些小的优化：这些优化，都是没有什么技巧，测试
+        //实践中，遇到了对应问题，就想到这种解决方案：...
+
         ResultScanner scanner = table.getScanner(scan);
         for (Result result : scanner) {
             List<Cell> listCell = result.listCells();
