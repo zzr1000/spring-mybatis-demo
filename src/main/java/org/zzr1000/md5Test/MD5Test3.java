@@ -10,6 +10,12 @@ public class MD5Test3 {// 三种生成md5方式：hutool、google、commons
 
         System.out.println(SecureUtil.md5("aaa"));
         System.out.println(DigestUtils.md5Hex("aaa"));
+        System.out.println(DigestUtils.md5Hex("aaa").substring(31));
         System.out.println(Hashing.md5().hashBytes("aaa".getBytes()));
+
+        //md5取模：
+        System.out.println(String.valueOf(Integer.valueOf(DigestUtils.md5Hex("aaa").substring(31),16)%10));
+
+        System.out.println(Integer.valueOf("f",16));//15
     }
 }
