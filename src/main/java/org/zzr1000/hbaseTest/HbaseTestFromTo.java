@@ -93,7 +93,7 @@ public class HbaseTestFromTo {
                 System.arraycopy(valueArray, valueoffset, tempvaluearray, 0, valuelength);
                 String tempvalue = Bytes.toString(tempvaluearray);
 
-                //增加md取模散列
+                //增加md取模散列//还缺少rowkey字段，在列族中的展示
                 String pre = String.valueOf(Integer.valueOf(DigestUtils.md5Hex(temprow).substring(31),16)%10);
                 byte[] rowkey = Bytes.toBytes(pre + "-" + temprow);
                 Put put = new Put(rowkey);
