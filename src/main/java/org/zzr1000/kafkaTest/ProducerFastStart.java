@@ -55,6 +55,8 @@ public class ProducerFastStart {
         properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, DefaultPartitioner.class.getName());
 
 
+        properties.put("ack","1");
+        properties.put(ProducerConfig.ACKS_CONFIG,"1");
 
         //可重试异常，重试次数：
         properties.put(ProducerConfig.RETRIES_CONFIG,10);
