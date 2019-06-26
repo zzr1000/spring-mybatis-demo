@@ -9,8 +9,8 @@ public class SecureUtilTest {
     @Test
     public void test1() {
         System.out.println(SecureUtil.md5("aaa"));
-        System.out.println(SecureUtil.md5(" aaa"));//两个md5值不同：..
-//        System.out.println(Hashing.md5().hashBytes("aaa".getBytes()).toString());
+      //System.out.println(SecureUtil.md5(" aaa"));//两个md5值不同：..
+        System.out.println(Hashing.md5().hashBytes("aaa".getBytes()).toString());
     }
 
 }
