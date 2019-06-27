@@ -2,8 +2,8 @@ package org.zzr1000.kafkaTest
 
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.{StringDeserializer, StringSerializer}
-import org.apache.spark.SparkConf
-import org.apache.spark.streaming.kafka010.KafkaUtils
+import org.apache.spark.{SparkConf, TaskContext}
+import org.apache.spark.streaming.kafka010.{HasOffsetRanges, KafkaUtils, OffsetRange}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.streaming.kafka010.LocationStrategies._
 import org.apache.spark.streaming.kafka010.ConsumerStrategies._
@@ -42,15 +42,22 @@ Direct方式是从Spark1.3开始引入的，
 注意使用Direct的方式并不意味着实现了精确一次的语义（ExactlyOnceSemantics），
 如果要达到精确一次的语义标准，则还需要配合幂等性操作或事务性操作。
  */
+
+/*
+Direct方式下，SparkStreaming会自己控制消费位移的处理，
+那么原本应该保存到Kafka中的消费位移就无法提供准确的信息了。
+但是在某些情况下，比如监控需求，我们又需要获取当前SparkStreaming正在处理的消费位移。
+SparkStreaming也考虑到了这种情况，可以通过下面的程序来获取消费位移：
+ */
 object SparkKafkaTestScala2 {
 
-  private val brokers = "114.67.69.229:9092"
+  private val brokers = "xxxxxx:9092"
   private val topic = "test"
   private val group = "t0628"
   private val checkPoint = "/root/v/spark/checkpoint"
 
   def main(args: Array[String]): Unit = {
-    val sparkConf = new SparkConf().setMaster("local").setAppName("Test")
+    val sparkConf = new SparkConf().setMaster("local[1]").setAppName("Test")
     val ssc = new StreamingContext(sparkConf, Seconds(5))
     ssc.checkpoint(checkPoint)
 
@@ -86,6 +93,17 @@ object SparkKafkaTestScala2 {
         PreferConsistent,
         Subscribe[String, String](List(topic), kafkaParam)
       )
+
+    /*
+    创建DStream之后，第一个调用
+     */
+    stream.foreachRDD(rdd => {
+      val offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
+      rdd.foreachPartition{
+        iter => val o:OffsetRange = offsetRanges(TaskContext.getPartitionId())
+        println(s"${o.topic}${o.partition}${o.fromOffset}${o.untilOffset}")
+      }
+    })
 
     val value = stream.map(record => {
       val intVal = Integer.valueOf(record.value())
