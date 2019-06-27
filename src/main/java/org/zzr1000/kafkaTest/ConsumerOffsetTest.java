@@ -13,7 +13,7 @@ import java.util.Properties;
 
 public class ConsumerOffsetTest {
 
-    public static final String brokerList = "xxxxx";
+    public static final String brokerList = "xxxxx:9092";
     public static final String topic = "test";
     public static final String groupId = "group.demo";
 
