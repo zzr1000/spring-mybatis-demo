@@ -25,5 +25,4 @@ public class DataInputOutputStreamTest {
       //System.out.println(dis.readUTF());
         dis.close();
     }
-
 }
