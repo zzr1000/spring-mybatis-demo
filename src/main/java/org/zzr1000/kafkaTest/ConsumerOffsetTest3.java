@@ -27,7 +27,7 @@ public class ConsumerOffsetTest3 {
 
         //consumer分配到的TopicPartition
         Set<TopicPartition> assignment = new HashSet();
-        //TopicPartition对应的offset
+        //各TopicPartition对应的要找offset的时间戳
         Map<TopicPartition,Long> timestampToSearch = new HashMap<>();
 
         //直到分配到partition，不停poll：不停poll，直到分配到消费的partition
