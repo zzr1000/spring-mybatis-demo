@@ -31,13 +31,27 @@ public class PipedTest {
         PipedInputStream pis = new PipedInputStream();
         PipedOutputStream pos = new PipedOutputStream();
         pis.connect(pos);
+    }
 
-        new Thread(()-> {
+    public static void main(String[] args) throws IOException {
+        PipedInputStream pis = new PipedInputStream();
+        PipedOutputStream pos = new PipedOutputStream();
+        pis.connect(pos);
+
+        new Thread(()->{
             try {
                 produce(pos);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        new Thread(()-> {
+            try {
+                consume(pis);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }).start();
