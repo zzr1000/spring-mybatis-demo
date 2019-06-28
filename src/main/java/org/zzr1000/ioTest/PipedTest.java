@@ -66,6 +66,7 @@ public class PipedTest {
             System.out.println("Writing:"+i);
             Thread.sleep(1000);
         }
+        pos.close();
     }
 
     public static void consume(PipedInputStream pis) throws IOException {
