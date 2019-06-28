@@ -24,6 +24,13 @@ public class CharStringTest {
             System.out.println(Integer.toBinaryString(c1));
         }
 
+        //string可以转换为byte：byte、char、int可以相互转换
+        byte[] b = test2.getBytes();
+        for (byte b1:b){
+            System.out.println(b1);
+            System.out.println(Integer.toBinaryString(b1));
+        }
+
     }
 
 }
