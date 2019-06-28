@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.io.*;
 
 /*
-
+注意：serialVersionUID
  */
 public class ObjectInputOutputStreamTest {
 
@@ -31,6 +31,11 @@ public class ObjectInputOutputStreamTest {
 }
 
 class User implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
+    private String name;
+
     public String getName() {
         return name;
     }
@@ -39,5 +44,4 @@ class User implements Serializable{
         this.name = name;
     }
 
-    private String name;
 }
