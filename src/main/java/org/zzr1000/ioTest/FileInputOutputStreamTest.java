@@ -12,7 +12,7 @@ InputStream、OutputStream：针对字节的操作：
     子类：FileInputStream、FileOutputStream
 Read、Write：针对文本的操作
  */
-public class InputStreamOutputStreamTest {
+public class FileInputOutputStreamTest {
 
     @Test
     public void test() throws IOException {
