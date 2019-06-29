@@ -8,6 +8,7 @@ import org.zzr1000.springTest.dao.StudentMapper;
 import org.zzr1000.springTest.model.StudentInfo;
 import org.zzr1000.springTest.service.StudentIService;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -16,7 +17,7 @@ import java.util.List;
 public class StudentService implements StudentIService {
 
 
-    @Autowired
+    @Resource
     StudentMapper studentMapper;
 
 
