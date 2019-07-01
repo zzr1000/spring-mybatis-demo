@@ -3,6 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--sqlSession.selectOne("userTest.selectUser", 3)namespace的值，就是用在语句的这个位置-->
 <!--官网参考：http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html-->
+<!--在面向接口的使用中，这个 namespace就是接口所在的包名，
+当前用法是没有接口，只有配置文件，所以，需要有这边指定namespace，
+前台程序在使用的时候，根据这个namespace指定要引用的语句id-->
 <mapper namespace="userTest">
     <select id="selectUser" parameterType="int" resultType="User">
         select * from User where id = #{id}
