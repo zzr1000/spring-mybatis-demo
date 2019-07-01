@@ -2,6 +2,18 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--配置文件里配置项目是有先后顺序的，依次是：
+properties,
+settings,
+typeAliases,
+typeHandlers,
+objectFactory,
+objectWrapperFactory,
+plugins,
+environments,
+databaseIdProvider,
+mappers，
+那个选项不配置，它的位置空出来，但顺序必须遵循，否则会报错。-->
 <configuration>
     <typeAliases>
         <typeAlias type="org.zzr1000.mybatisTest.test1.User" alias="User" />
