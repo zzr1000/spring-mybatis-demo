@@ -1,5 +1,9 @@
 package org.zzr1000.flinkTest;
 
+/**
+ * 详细的flink编码、测试、打包流程：
+ * https://www.cnblogs.com/ALittleMoreLove/archive/2018/08/09/9449992.html
+ */
 
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.functions.FoldFunction;
