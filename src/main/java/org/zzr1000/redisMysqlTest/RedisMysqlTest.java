@@ -26,14 +26,14 @@ public class RedisMysqlTest {
 
         if(redis.hexists("user_"+id, "username_")){
             username=redis.hget("user_"+id, "username_");
-            System.out.println("Welcome Redis! User "+username+" login success");
+            System.out.println("Welcome Redis! User2 "+username+" login success");
         }else{
             rs=mysql.conn.createStatement().executeQuery(sql);
             if(rs.next()==false){
                 System.out.println("Mysql no register, Please register first");
             }else{
                 username=rs.getString("username_");
-                System.out.println("Welcome Mysql ! User "+username+" login success");
+                System.out.println("Welcome Mysql ! User2 "+username+" login success");
                 //这种小的用户名、密码的信息， 可以使用hash数据结构存储
                 //对于大的数据集的话，可以直接将结果集转成json数组
                 //对于key来说，这个demo中key比较简单，可以直接将业务内容，当key存储、查询
