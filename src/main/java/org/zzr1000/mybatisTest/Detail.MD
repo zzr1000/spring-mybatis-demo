@@ -10,7 +10,7 @@ https://blog.mybatis.org/
 https://blog.csdn.net/lj1314ailj/article/details/79712305
 https://www.cnblogs.com/pixy/p/5038275.html
 
-search：oredCriteria
+search：oredCriteria、Criterion
 
 http://www.mybatis.org/mybatis-3/zh/getting-started.html
 http://www.mybatis.org/spring/zh/
