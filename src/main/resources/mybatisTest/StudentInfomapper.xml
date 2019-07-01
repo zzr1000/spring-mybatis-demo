@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.zzr1000.mybatisTest.StudentInfomapper"><!-- 映射接口类的 路径！！！ -->
+<mapper namespace="org.zzr1000.mybatisTest.test3.StudentInfomapper"><!-- 映射接口类的 路径！！！ -->
 
     <!-- 实体类 中 与表名字 不同  使用 resultMap 来创建 别名映射！-->
     <resultMap type="users" id="userMap">

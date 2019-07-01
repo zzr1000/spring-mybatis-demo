@@ -5,7 +5,7 @@
     <typeAliases>
         <!--这个 包下面的 所有 实体类 别名 自动 创建 -->
         <!--package name="ankermaker.top.entity"/-->
-        <typeAlias alias="studentInfo" type="org.zzr1000.mybatisTest.StudentInfo"/>
+        <typeAlias alias="studentInfo" type="org.zzr1000.mybatisTest.test3.StudentInfo"/>
 
     </typeAliases>
 
