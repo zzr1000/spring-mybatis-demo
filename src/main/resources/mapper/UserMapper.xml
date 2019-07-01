@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--sqlSession.selectOne("userTest.selectUser", 3)namespace的值，就是用在语句的这个位置-->
+<mapper namespace="userTest">
+    <select id="selectUser" parameterType="int" resultType="User">
+        select * from User where id = #{id}
+    </select>
+</mapper>
