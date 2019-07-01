@@ -2,7 +2,10 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<!--配置文件里配置项目是有先后顺序的，依次是：
+<!--
+refer to：https://www.cnblogs.com/manliu/p/4149053.html
+
+配置文件里配置项目是有先后顺序的，依次是：
 properties,
 settings,
 typeAliases,
