@@ -13,6 +13,10 @@ import org.junit.Test;
 import org.zzr1000.mybatisTest.test2.dao.User2mapper;
 import org.zzr1000.mybatisTest.test2.model.User2;
 
+/**
+ * refer to :
+ * https://www.cnblogs.com/Ankermaker/p/6930903.html
+ */
 
 public class MybatisTest {
 
