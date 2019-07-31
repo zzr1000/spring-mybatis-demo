@@ -19,7 +19,7 @@ public class HbaseUtil {
     static {
         configuration = HBaseConfiguration.create();
         configuration.set("hbase.zookeeper.property.clientPort", "2181");
-        configuration.set("hbase.zookeeper.quorum", "bigdata-platform-test-01,bigdata-platform-test-02,bigdata-platform-test-03");
+        configuration.set("hbase.zookeeper.quorum", "bigdata-test-01,bigdata-test-02,bigdata-test-03");
         configuration.set("zookeeper.znode.parent", "/hbase-unsecure");
     }
 
